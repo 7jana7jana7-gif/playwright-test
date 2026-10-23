@@ -122,4 +122,15 @@ test.describe('Тесты главной страницы', () => {
       'Playwright enables reliable web automation for testing, scripting, and AI agents.',
     );
   });
+
+  ['light', 'dark'].forEach((value) => {
+    // переключение день+ночь со скринами
+    test(`Скриншот в теме ${value}`, async ({ page }) => {
+      await page.evaluate(
+        (theme) => document.documentElement.setAttribute('data-theme', theme),
+        value,
+      );
+      await page.screenshot({ path: `modal-active-${value}.png`, fullPage: true });
+    });
+  });
 });
